@@ -1,0 +1,19 @@
+{
+  "name": "what_to_eat_backend",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaeuk9210/WhatToEat_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaeuk9210/WhatToEat_Backend/issues"
+  },
+  "homepage": "https://github.com/jaeuk9210/WhatToEat_Backend#readme"
+}
