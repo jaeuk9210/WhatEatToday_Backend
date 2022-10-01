@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec babel-node server"
+    "dev": "nodemon --exec babel-node server",
+    "migrate": "npx prisma migrate dev"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,15 @@
   },
   "homepage": "https://github.com/jaeuk9210/WhatToEat_Backend#readme",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.6.1",
+    "@graphql-tools/merge": "^8.3.6",
+    "@graphql-tools/schema": "^9.0.4",
+    "@prisma/client": "^4.4.0",
     "apollo-server": "^3.10.2",
-    "graphql": "^16.6.0"
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
@@ -26,6 +34,5 @@
     "@babel/preset-env": "^7.19.3",
     "nodemon": "^2.0.20",
     "prisma": "^4.4.0"
-  },
-  "type": "module"
+  }
 }
