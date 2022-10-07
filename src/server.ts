@@ -22,7 +22,7 @@ const parseToken = (value) => {
 };
 
 const startServer = async () => {
-  const server = new ApolloServer({
+  const apollo = new ApolloServer({
     resolvers,
     typeDefs,
     csrfPrevention: false,
@@ -34,13 +34,17 @@ const startServer = async () => {
     },
   });
 
-  await server.start();
+  await apollo.start();
+
   const app = express();
+
   app.use(graphqlUploadExpress());
   app.use(logger("tiny"));
-  server.applyMiddleware({ app });
+  app.use("/static", express.static("upload"));
+  apollo.applyMiddleware({ app });
+
   await new Promise((func) => app.listen({ port: PORT }, func));
-  console.log(`🚀 Server: http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`🚀 Server: http://localhost:${PORT}${apollo.graphqlPath}`);
 };
 
 startServer();

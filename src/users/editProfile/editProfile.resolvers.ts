@@ -1,12 +1,9 @@
 import * as bcrypt from "bcrypt";
-import { GraphQLUpload } from "graphql-upload";
 import { Resolvers } from "../../types";
 import { protectResolver } from "../users.utils";
 import { createWriteStream } from "fs";
 
-const resolvers = {
-  Upload: GraphQLUpload,
-
+const resolvers: Resolvers = {
   Mutation: {
     editProfile: protectResolver(
       async (
@@ -22,12 +19,17 @@ const resolvers = {
         },
         { loggedInUser, client }
       ) => {
-        const { filename, createReadStream } = await avatar;
-        const readStream = createReadStream();
-        const writeStream = createWriteStream(
-          process.cwd() + "/upload/" + filename
-        );
-        readStream.pipe(writeStream);
+        let avatarUrl = null;
+        if (avatar) {
+          const { filename, createReadStream } = await avatar;
+          const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
+          const readStream = createReadStream();
+          const writeStream = createWriteStream(
+            process.cwd() + "/upload/" + newFilename
+          );
+          readStream.pipe(writeStream);
+          avatarUrl = `http://back.wet.jeuke.com/static/${newFilename}`;
+        }
         let hashedPassword = null;
         if (newPassword) {
           hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -44,6 +46,7 @@ const resolvers = {
             email,
             bio,
             ...(hashedPassword && { password: hashedPassword }),
+            ...(avatarUrl && { avatar: avatarUrl }),
           },
         });
 
