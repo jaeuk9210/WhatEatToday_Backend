@@ -25,7 +25,7 @@ const resolvers: Resolvers = {
           const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
           const readStream = createReadStream();
           const writeStream = createWriteStream(
-            process.cwd() + "/upload/" + newFilename
+            process.cwd() + "/uploads/" + newFilename
           );
           readStream.pipe(writeStream);
           avatarUrl = `http://back.wet.jeuke.com/static/${newFilename}`;

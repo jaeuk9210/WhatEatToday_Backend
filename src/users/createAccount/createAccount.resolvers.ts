@@ -20,6 +20,7 @@ const resolvers: Resolvers = {
               },
             ],
           },
+          select: { id: true },
         });
         if (existingUser) {
           throw new Error("This username/password is already taken.");

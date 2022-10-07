@@ -5,7 +5,10 @@ const resolvers: Resolvers = {
   Mutation: {
     unfollowUser: protectedResolver(
       async (_, { username }, { loggedInUser, client }) => {
-        const ok = await client.user.findUnique({ where: { username } });
+        const ok = await client.user.findUnique({
+          where: { username },
+          select: { id: true },
+        });
         if (!ok) {
           return {
             ok: false,

@@ -40,7 +40,7 @@ const startServer = async () => {
 
   app.use(graphqlUploadExpress());
   app.use(logger("tiny"));
-  app.use("/static", express.static("upload"));
+  app.use("/static", express.static("uploads"));
   apollo.applyMiddleware({ app });
 
   await new Promise((func) => app.listen({ port: PORT }, func));

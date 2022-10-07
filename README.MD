@@ -11,3 +11,6 @@ What To Eat Backend
 - [x] Change Avatar
 - [x] Follow User
 - [x] Unfollow User
+- [x] See Followers and See Following w/ Pagination
+- [ ] Computed Fields
+- [ ] Search Users
