@@ -1,6 +1,8 @@
-import { gql } from "apollo-server";
+import { gql } from "apollo-server-express";
 
 export default gql`
+  scalar Upload
+
   type EditProfileResult {
     ok: Boolean!
     error: String
@@ -12,6 +14,17 @@ export default gql`
       username: String
       email: String
       password: String
+      bio: String
+      avatar: Upload
     ): EditProfileResult!
+  }
+
+  type File{
+    _id: ID
+    filename: String
+    mimetype: String
+    endcoding: String
+    path: String
+    ok: Boolean
   }
 `;
