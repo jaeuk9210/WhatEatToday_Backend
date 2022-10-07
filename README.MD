@@ -7,7 +7,7 @@ What To Eat Backend
 - [x] Create Account
 - [x] See Profile
 - [x] Login
-- [ ] Edit Profile
-- [ ] Change Avatar
-- [ ] Follow User
-- [ ] Unfollow User
+- [x] Edit Profile
+- [x] Change Avatar
+- [x] Follow User
+- [x] Unfollow User

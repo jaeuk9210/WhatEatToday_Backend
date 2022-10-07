@@ -1,11 +1,11 @@
 import * as bcrypt from "bcrypt";
 import { Resolvers } from "../../types";
-import { protectResolver } from "../users.utils";
+import { protectedResolver } from "../users.utils";
 import { createWriteStream } from "fs";
 
 const resolvers: Resolvers = {
   Mutation: {
-    editProfile: protectResolver(
+    editProfile: protectedResolver(
       async (
         _,
         {
