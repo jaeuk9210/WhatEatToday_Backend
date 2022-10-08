@@ -15,6 +15,12 @@ const resolvers: Resolvers = {
             error: "That user does not exist.",
           };
         }
+        if (ok.id === loggedInUser.id) {
+          return {
+            ok: false,
+            error: "You can't follow yourself.",
+          };
+        }
         await client.user.update({
           where: {
             id: loggedInUser.id,
