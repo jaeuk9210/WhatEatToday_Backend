@@ -12,5 +12,16 @@ What To Eat Backend
 - [x] Follow User
 - [x] Unfollow User
 - [x] See Followers and See Following w/ Pagination
-- [ ] Computed Fields
-- [ ] Search Users
+- [x] Computed Fields
+- [x] Search Users
+
+## Photos
+
+- [x] Upload Photo
+- [ ] See Photo
+- [ ] See Hashtags
+- [ ] Search Photos
+- [ ] Edit Photo
+- [ ] Like / Unlike Photo
+- [ ] See Photo Likes
+- [ ] See Feed
