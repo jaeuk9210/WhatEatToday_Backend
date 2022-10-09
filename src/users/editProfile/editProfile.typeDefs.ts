@@ -16,13 +16,4 @@ export default gql`
       avatar: Upload
     ): EditProfileResult!
   }
-
-  type File {
-    _id: ID
-    filename: String
-    mimetype: String
-    endcoding: String
-    path: String
-    ok: Boolean
-  }
 `;
