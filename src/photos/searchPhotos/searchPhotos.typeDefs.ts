@@ -1,7 +1,7 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
-export default gql `
+export default gql`
   type Query {
-    searchPhotos(keyword: String!): [Photo]
+    searchPhotos(keyword: String!, lastId: Int): [Photo]
   }
-`
+`;
