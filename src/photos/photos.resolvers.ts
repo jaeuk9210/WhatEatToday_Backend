@@ -17,6 +17,8 @@ const resolvers: Resolvers = {
       }),
     likes: ({ id }, _, { client }) =>
       client.like.count({ where: { photoId: id } }),
+    comments: ({ id }, _, { client }) =>
+      client.comment.count({ where: { photoId: id } }),
   },
 
   Hashtag: {

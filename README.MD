@@ -24,4 +24,12 @@ What To Eat Backend
 - [x] Edit Photo
 - [x] Like / Unlike Photo
 - [x] See Photo Likes
-- [ ] See Feed
+- [ ] See Photo Likes
+- [x] See Feed
+- [ ] is Mine (Delete Photo)
+
+## Comment
+
+- [ ] Commont on Photo
+- [ ] Edit Comment
+- [ ] Delete Comment (Is Mine)
