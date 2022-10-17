@@ -32,4 +32,4 @@ What To Eat Backend
 
 - [x] Commont on Photo
 - [x] Edit Comment
-- [ ] Delete Comment (Is Mine)
+- [x] Delete Comment (Is Mine)
