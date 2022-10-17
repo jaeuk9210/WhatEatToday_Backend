@@ -129,4 +129,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Uploaded files
 uploads/
+
+#macOS DS_Store file
+*.DS_Store
