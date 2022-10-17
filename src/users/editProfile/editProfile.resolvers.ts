@@ -2,6 +2,7 @@ import * as bcrypt from "bcrypt";
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../users.utils";
 import { createWriteStream } from "fs";
+import { deleteFromS3, uploadToS3 } from "../../shared/shared.utils";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -21,20 +22,15 @@ const resolvers: Resolvers = {
       ) => {
         let avatarUrl = null;
         if (avatar) {
-          const { filename, createReadStream } = await avatar;
-          const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
-          const readStream = createReadStream();
-          const writeStream = createWriteStream(
-            process.cwd() + "/uploads/" + newFilename
-          );
-          readStream.pipe(writeStream);
-          avatarUrl = `http://back.wet.jeuke.com/static/${newFilename}`;
+          avatarUrl = await uploadToS3(avatar, loggedInUser.id, "avatars");
         }
         let hashedPassword = null;
         if (newPassword) {
           hashedPassword = await bcrypt.hash(newPassword, 10);
         }
-
+        if (loggedInUser.avatar) {
+          await deleteFromS3(loggedInUser.avatar, "avatars");
+        }
         const updatedUser = await client.user.update({
           where: {
             id: loggedInUser.id,

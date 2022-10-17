@@ -1,3 +1,4 @@
+import { deleteFromS3 } from "../../shared/shared.utils";
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../../users/users.utils";
 
@@ -11,6 +12,7 @@ const resolvers: Resolvers = {
           },
           select: {
             userId: true,
+            file: true,
           },
         });
 
@@ -25,6 +27,7 @@ const resolvers: Resolvers = {
             error: "Not authorized.",
           };
         } else {
+          await deleteFromS3(photo.file, "uploads");
           await client.photo.delete({
             where: {
               id,

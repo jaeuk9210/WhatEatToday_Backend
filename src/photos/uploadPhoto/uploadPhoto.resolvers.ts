@@ -1,3 +1,4 @@
+import { uploadToS3 } from "../../shared/shared.utils";
 import { Resolvers } from "../../types";
 import { protectedResolver } from "../../users/users.utils";
 import { processHashtags } from "../photos.utils";
@@ -6,26 +7,27 @@ const resolvers: Resolvers = {
   Mutation: {
     uploadPhoto: protectedResolver(
       async (_, { file, caption }, { client, loggedInUser }) => {
-        const photo = client.photo.create({
+        let hashtagObj = [];
+        if (caption) {
+          hashtagObj = processHashtags(caption);
+        }
+        const fileUrl = await uploadToS3(file, loggedInUser.id, "uploads");
+        return client.photo.create({
           data: {
             user: {
               connect: {
                 id: loggedInUser.id,
               },
             },
-            file,
+            file: fileUrl,
             caption,
-            hashtags: {
-              connectOrCreate: processHashtags(caption),
-            },
+            ...(hashtagObj.length > 0 && {
+              hashtags: {
+                connectOrCreate: processHashtags(caption),
+              },
+            }),
           },
         });
-        if (photo) {
-          return {
-            ok: true,
-            result: photo,
-          };
-        }
       }
     ),
   },
