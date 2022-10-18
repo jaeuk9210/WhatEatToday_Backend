@@ -1,4 +1,5 @@
 import * as AWS from "aws-sdk";
+import { File } from "../types";
 
 AWS.config.update({
   credentials: {
@@ -7,7 +8,11 @@ AWS.config.update({
   },
 });
 
-export const uploadToS3 = async (file, userId, folderName) => {
+export const uploadToS3 = async (
+  file: Promise<File>,
+  userId: number,
+  folderName: string
+) => {
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
   const objectName = `${folderName}/${userId}-${Date.now()}-${filename}`;
@@ -22,9 +27,12 @@ export const uploadToS3 = async (file, userId, folderName) => {
   return Location;
 };
 
-export const deleteFromS3 = async (fileUrls, folderName) => {
+export const deleteFromS3 = async (
+  fileUrls: string[] | string,
+  folderName: string
+) => {
   if (Array.isArray(fileUrls)) {
-    fileUrls.forEach(async (fileUrl) => {
+    fileUrls.forEach(async (fileUrl: string) => {
       const decodedUrl = decodeURI(fileUrl);
       const filePath = decodedUrl.split(`/${folderName}/`)[1];
       const fileName = `${folderName}/${filePath}`;

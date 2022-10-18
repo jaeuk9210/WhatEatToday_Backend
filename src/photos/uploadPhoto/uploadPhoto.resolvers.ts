@@ -1,5 +1,5 @@
 import { uploadToS3 } from "../../shared/shared.utils";
-import { Resolvers } from "../../types";
+import { File, Resolvers } from "../../types";
 import { protectedResolver } from "../../users/users.utils";
 import { processHashtags } from "../photos.utils";
 
@@ -11,10 +11,9 @@ const resolvers: Resolvers = {
         if (caption) {
           hashtagObj = processHashtags(caption);
         }
-        console.log("files", files);
         let fileUrls = [];
 
-        const uploadFiles = (file) => {
+        const uploadFiles = (file: Promise<File>) => {
           return new Promise((resolve) => {
             uploadToS3(file, loggedInUser.id, "uploads").then((url) => {
               fileUrls.push(url);
@@ -22,7 +21,7 @@ const resolvers: Resolvers = {
             });
           });
         };
-        const promises = files.map((file) => uploadFiles(file));
+        const promises = files.map((file: Promise<File>) => uploadFiles(file));
         await Promise.all(promises);
 
         const ok = await client.photo.create({

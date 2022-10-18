@@ -17,3 +17,10 @@ export type Resolvers = {
     [key: string]: Resolver;
   };
 };
+
+export type File = {
+  filename: string;
+  minetype: string;
+  encoding: string;
+  createReadStream: any;
+};
