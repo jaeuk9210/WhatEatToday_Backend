@@ -6,20 +6,33 @@ import { processHashtags } from "../photos.utils";
 const resolvers: Resolvers = {
   Mutation: {
     uploadPhoto: protectedResolver(
-      async (_, { file, caption }, { client, loggedInUser }) => {
+      async (_, { files, caption }, { client, loggedInUser }) => {
         let hashtagObj = [];
         if (caption) {
           hashtagObj = processHashtags(caption);
         }
-        const fileUrl = await uploadToS3(file, loggedInUser.id, "uploads");
-        return client.photo.create({
+        console.log("files", files);
+        let fileUrls = [];
+
+        const uploadFiles = (file) => {
+          return new Promise((resolve) => {
+            uploadToS3(file, loggedInUser.id, "uploads").then((url) => {
+              fileUrls.push(url);
+              resolve(null);
+            });
+          });
+        };
+        const promises = files.map((file) => uploadFiles(file));
+        await Promise.all(promises);
+
+        const ok = await client.photo.create({
           data: {
             user: {
               connect: {
                 id: loggedInUser.id,
               },
             },
-            file: fileUrl,
+            file: fileUrls,
             caption,
             ...(hashtagObj.length > 0 && {
               hashtags: {
@@ -28,6 +41,12 @@ const resolvers: Resolvers = {
             }),
           },
         });
+
+        if (ok) {
+          return {
+            ok: true,
+          };
+        }
       }
     ),
   },

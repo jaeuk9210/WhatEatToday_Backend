@@ -22,15 +22,30 @@ export const uploadToS3 = async (file, userId, folderName) => {
   return Location;
 };
 
-export const deleteFromS3 = async (fileUrl, folderName) => {
-  const decodedUrl = decodeURI(fileUrl);
-  const filePath = decodedUrl.split(`/${folderName}/`)[1];
-  const fileName = `${folderName}/${filePath}`;
+export const deleteFromS3 = async (fileUrls, folderName) => {
+  if (Array.isArray(fileUrls)) {
+    fileUrls.forEach(async (fileUrl) => {
+      const decodedUrl = decodeURI(fileUrl);
+      const filePath = decodedUrl.split(`/${folderName}/`)[1];
+      const fileName = `${folderName}/${filePath}`;
 
-  await new AWS.S3()
-    .deleteObject({
-      Bucket: "wet-uploads",
-      Key: fileName,
-    })
-    .promise();
+      await new AWS.S3()
+        .deleteObject({
+          Bucket: "wet-uploads",
+          Key: fileName,
+        })
+        .promise();
+    });
+  } else {
+    const decodedUrl = decodeURI(fileUrls);
+    const filePath = decodedUrl.split(`/${folderName}/`)[1];
+    const fileName = `${folderName}/${filePath}`;
+
+    await new AWS.S3()
+      .deleteObject({
+        Bucket: "wet-uploads",
+        Key: fileName,
+      })
+      .promise();
+  }
 };

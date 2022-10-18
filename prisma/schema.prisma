@@ -32,7 +32,7 @@ model Photo {
   id        Int       @id @default(autoincrement())
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  file      String
+  file      String[]
   caption   String?
   hashtags  Hashtag[]
   createdAt DateTime  @default(now())
