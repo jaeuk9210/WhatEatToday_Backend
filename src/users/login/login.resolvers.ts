@@ -4,8 +4,8 @@ import { Resolvers } from "../../types";
 
 const resolvers: Resolvers = {
   Mutation: {
-    login: async (_, { username, password }, { client }) => {
-      const user = await client.user.findFirst({ where: { username } });
+    login: async (_, { email, password }, { client }) => {
+      const user = await client.user.findFirst({ where: { email } });
       if (!user) {
         return {
           ok: false,
