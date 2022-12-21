@@ -4,7 +4,7 @@ export default gql`
   type Comment {
     id: Int!
     user: User!
-    photo: Photo!
+    review: Review!
     payload: String!
     isMine: Boolean!
     createdAt: String!

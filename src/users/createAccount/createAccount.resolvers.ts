@@ -23,22 +23,21 @@ const resolvers: Resolvers = {
           select: { id: true },
         });
         if (existingUser) {
-          throw new Error("This username/password is already taken.");
+          throw new Error("This username is already taken.");
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const createdUser = await client.user.create({
           data: {
-            username,
-            email,
             firstName,
             lastName,
+            username,
+            email,
             password: hashedPassword,
           },
         });
         if (createdUser.id) {
           return {
             ok: true,
-            result: createdUser,
           };
         } else {
           return {

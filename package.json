@@ -22,6 +22,7 @@
     "@graphql-tools/merge": "^8.3.6",
     "@graphql-tools/schema": "^9.0.4",
     "@prisma/client": "^4.4.0",
+    "@types/twilio": "^3.19.3",
     "apollo-server-express": "^3.10.2",
     "aws-sdk": "^2.1233.0",
     "bcrypt": "^5.0.1",
@@ -30,7 +31,8 @@
     "graphql": "^16.6.0",
     "graphql-upload": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "twilio": "^3.83.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
