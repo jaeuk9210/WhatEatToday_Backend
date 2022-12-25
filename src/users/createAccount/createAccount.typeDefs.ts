@@ -8,6 +8,12 @@ export default gql`
       username: String!
       email: String!
       password: String!
-    ): MutationResponse!
+    ): CreateAccountResponse!
+  }
+
+  type CreateAccountResponse {
+    ok: String!
+    error: String
+    id: Int
   }
 `;

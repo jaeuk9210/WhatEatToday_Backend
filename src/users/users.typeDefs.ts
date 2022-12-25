@@ -9,8 +9,10 @@ export default gql`
     email: String!
     createdAt: String!
     updatedAt: String!
-    bio: String
+    gender: Gender
     avatar: String
+    phone: String
+    birth: String
     reviews(lastId: Int): [Review]
     following: [User]
     followers: [User]
@@ -18,5 +20,10 @@ export default gql`
     totalFollowers: Int!
     isMe: Boolean!
     isFollowing: Boolean!
+  }
+
+  enum Gender {
+    male
+    female
   }
 `;

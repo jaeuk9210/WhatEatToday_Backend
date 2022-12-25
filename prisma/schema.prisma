@@ -37,6 +37,11 @@ enum Category {
   pub
 }
 
+enum Gender {
+  male
+  female
+}
+
 model Place {
   id          Int        @id @default(autoincrement())
   name        String
@@ -82,8 +87,10 @@ model User {
   username  String    @unique
   email     String    @unique
   password  String
-  bio       String?
+  gender    Gender?
   avatar    String?
+  phone     String?   @unique
+  birth     DateTime?
   reviews   Review[]
   followers User[]    @relation("FollowRelation")
   following User[]    @relation("FollowRelation")

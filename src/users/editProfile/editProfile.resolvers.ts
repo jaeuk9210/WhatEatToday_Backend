@@ -15,8 +15,9 @@ const resolvers: Resolvers = {
           username,
           email,
           password: newPassword,
-          bio,
+          gender,
           avatar,
+          phone,
         },
         { loggedInUser, client }
       ) => {
@@ -40,7 +41,8 @@ const resolvers: Resolvers = {
             lastName,
             username,
             email,
-            bio,
+            gender,
+            phone,
             ...(hashedPassword && { password: hashedPassword }),
             ...(avatarUrl && { avatar: avatarUrl }),
           },

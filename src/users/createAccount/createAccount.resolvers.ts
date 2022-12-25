@@ -38,6 +38,7 @@ const resolvers: Resolvers = {
         if (createdUser.id) {
           return {
             ok: true,
+            id: createdUser.id,
           };
         } else {
           return {
